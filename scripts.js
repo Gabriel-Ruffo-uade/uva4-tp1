@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+
+  // Funcionalidad del menú hamburguesa
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  }
+
+  // Código específico para la página de chistes
   const chistes = [
     "¿Qué hace una abeja en el gimnasio? ¡Zum-ba!",
     "¿Cómo se despiden los químicos? Ácido un placer.",
@@ -12,25 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
     "¿Qué hace un pez? ¡Nada!"
   ];
 
-  let indice = 0;
-
   const chisteElemento = document.getElementById("chiste");
   const btnAnterior = document.getElementById("anterior");
   const btnSiguiente = document.getElementById("siguiente");
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
+  let indice = 0;
 
-  // Funcionalidad del menu hamburguesa
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
-  }
-
-  // Funcionalidad de los chistes (solo si están presentes)
+  // Solo ejecutar si existen los botones y el chiste
   if (chisteElemento && btnAnterior && btnSiguiente) {
     function mostrarChiste(index) {
-      chisteElemento.textContent = chistes[index];
+      // Efecto de rotación
+      chisteElemento.parentElement.classList.add("rotate");
+      setTimeout(() => {
+        chisteElemento.textContent = chistes[index];
+        chisteElemento.parentElement.classList.remove("rotate");
+      }, 300);
     }
 
     btnAnterior.addEventListener("click", () => {
